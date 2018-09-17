@@ -7,8 +7,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "jcore-react-native": "^1.2.9",
+    "jmessage-react-plugin": "^2.4.4",
     "react": "16.5.0",
-    "react-native": "0.57.0"
+    "react-native": "0.57.0",
+    "react-native-chat-ui": "git+https://github.com/25juan/react-native-chat-ui.git"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
