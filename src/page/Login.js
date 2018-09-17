@@ -8,14 +8,7 @@ export default class  extends Component{
         username:"",
         password:"",
     };
-    componentDidMount(){
-        (async()=>{
-            let username = await AsyncStorage.getItem('username');
-            if(username){
-                this.props.navigation.navigate("Main");
-            }
-        })();
-    }
+
     register = ()=>{
         this.props.navigation.navigate("Register") ;
     };
