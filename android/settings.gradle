@@ -1,0 +1,3 @@
+rootProject.name = 'ReactNativeChatuiDemo'
+
+include ':app'
