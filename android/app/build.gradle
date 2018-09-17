@@ -141,7 +141,8 @@ android {
 }
 
 dependencies {
-    compile project(':jmessage-react-plugin')
+    implementation project(':jmessage-react-plugin')
+    implementation project(':jcore-react-native')  // 添加 jcore 依赖
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
