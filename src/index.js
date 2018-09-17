@@ -9,16 +9,32 @@ import Mine from "./page/Mine";
 import Loding from "./page/Loding";
 const MainTab = createTabNavigator({
     Friends:{
-        screen:Friends
+        screen:Friends,
+        navigationOptions:{
+            tabBarLabel:"好友",
+        }
     },
     Session:{
-        screen:Session
+        screen:Session,
+        navigationOptions:{tabBarLabel:"会话"}
     },
     Mine:{
-        screen:Mine
+        screen:Mine,
+        navigationOptions:{tabBarLabel:"我的"}
     },
 },{
     tabBarPosition :"bottom",
+    tabBarOptions:{
+        style:{
+            backgroundColor:"#45b3c4",
+        },
+        labelStyle:{
+            color:"#fff"
+        },
+        indicatorStyle:{
+            backgroundColor:"#fff"
+        }
+    }
 });
 
 
@@ -27,7 +43,10 @@ const MainNavigator = createStackNavigator({
         screen:Chat
     },
     Main:{
-        screen:MainTab
+        screen:MainTab,
+        navigationOptions:{
+            header:null
+        }
     }
 },{
     initialRouteName:"Main"
