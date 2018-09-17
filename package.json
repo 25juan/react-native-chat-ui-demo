@@ -9,9 +9,14 @@
   "dependencies": {
     "jcore-react-native": "^1.2.9",
     "jmessage-react-plugin": "^2.4.4",
+    "lodash": "^4.17.11",
+    "mobx": "^5.1.1",
+    "mobx-react": "^5.2.8",
+    "prop-types": "^15.6.2",
     "react": "16.5.0",
     "react-native": "0.57.0",
-    "react-native-chat-ui": "git+https://github.com/25juan/react-native-chat-ui.git"
+    "react-native-chat-ui": "git+https://github.com/25juan/react-native-chat-ui.git",
+    "react-navigation": "^2.14.2"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
