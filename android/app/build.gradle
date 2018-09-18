@@ -101,6 +101,7 @@ android {
         applicationId "com.reactnativechatuidemo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+
         versionCode 1
         versionName "1.0"
         ndk {
@@ -110,6 +111,7 @@ android {
             JPUSH_APPKEY: "0d5de1ff3773f591c7250f27",	//在此替换你的APPKey
             APP_CHANNEL: "developer-default"		//应用渠道号
         ]
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {
@@ -141,6 +143,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-crop-picker')
+
+    compile project(':react-native-sound')
+    compile project(':react-native-audio')
     compile project(':react-native-vector-icons')
     implementation project(':jmessage-react-plugin')
     implementation project(':jcore-react-native')  // 添加 jcore 依赖

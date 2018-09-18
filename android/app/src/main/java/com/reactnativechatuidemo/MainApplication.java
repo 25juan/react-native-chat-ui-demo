@@ -3,6 +3,10 @@ package com.reactnativechatuidemo;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+
+import com.zmxv.RNSound.RNSoundPackage;
+import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import io.jchat.android.JMessageReactPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +29,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new PickerPackage(),
+
+            new RNSoundPackage(),
+            new ReactNativeAudioPackage(),
             new VectorIconsPackage(),
             new JMessageReactPackage(shutdownToast)
       );
