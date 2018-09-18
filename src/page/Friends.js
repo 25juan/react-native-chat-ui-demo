@@ -58,10 +58,16 @@ export default class  extends Component{
            },()=>{});
         }
     };
+    goToChat =(item)=>{
+        JMessage.createConversation({ type: 'single', username: item['username'] },(conversation) => {
+                this.props.navigation.navigate("Chat",{ ...item });
+                this.props.store.loadConversation();
+            }, (error) => {}) ;
+    };
     renderItem = ({ item })=>{
         return (
             <ListItem
-                onPress={()=>this.props.navigation.navigate("Chat",{ ...item })}
+                onPress={()=>this.goToChat(item)}
                 avatar>
                 <Left>
                     <Thumbnail source={{uri:item.avatarThumbPath || defaultAvatar }}/>

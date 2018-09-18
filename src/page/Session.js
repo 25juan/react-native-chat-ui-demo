@@ -1,8 +1,18 @@
 import React,{ Component } from "react" ;
 import { Input,Text,Container,Header,Left,List,ListItem,Content,Button,Right,Thumbnail,Icon,Body,Title,StyleProvider  } from "native-base" ;
-
+import { inject,observer } from "mobx-react" ;
+import JMessage from "jmessage-react-plugin";
+@inject("store")
+@observer
 export default class  extends Component{
+    goToChat =(item)=>{
+        JMessage.createConversation({ type: 'single', username: item['username'] },(conversation) => {
+            this.props.navigation.navigate("Chat",{ ...item });
+            this.props.store.loadConversation();
+        }, (error) => {}) ;
+    };
     render(){
+        let { conversations } = this.props.store ;
         return (
             <Container>
                 <Header>
@@ -12,32 +22,22 @@ export default class  extends Component{
                 </Header>
                 <Content>
                     <List>
-                        <ListItem avatar>
-                            <Left>
-                                <Thumbnail source={{uri:"https://raw.githubusercontent.com/25juan/react-native-chat-ui/master/example/image/right.png"}}/>
-                            </Left>
-                            <Body>
-                            <Text>Kumar Pratik</Text>
-                            <Text note>Doing what you like will always keep you happy . .</Text>
-                            </Body>
-                            <Right>
-                                <Text note>3:43 pm</Text>
-                            </Right>
-                        </ListItem>
-                        <ListItem avatar>
-                            <Left>
-                                <Thumbnail source={{uri:"https://raw.githubusercontent.com/25juan/react-native-chat-ui/master/example/image/right.png"}}/>
-                            </Left>
-                            <Body>
-                            <Text>Kumar Pratik</Text>
-                            <Text note>Doing what you like will always keep you happy . .</Text>
-                            </Body>
-                            <Right>
-                                <Text note>3:43 pm</Text>
-                            </Right>
-                        </ListItem>
-
-
+                        {
+                            conversations.map((item,index)=>(
+                                <ListItem button={true} onPress={()=>this.goToChat(item.target)} key={index} avatar>
+                                    <Left>
+                                        <Thumbnail source={{uri:item.avatar}}/>
+                                    </Left>
+                                    <Body>
+                                    <Text>{item.title}</Text>
+                                    <Text note>{ item.text }</Text>
+                                    </Body>
+                                    <Right>
+                                        <Text note>{ item.date }</Text>
+                                    </Right>
+                                </ListItem>
+                            ))
+                        }
                     </List>
                 </Content>
             </Container>

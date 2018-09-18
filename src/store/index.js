@@ -1,9 +1,12 @@
 import { observable,computed,action,toJS } from "mobx" ;
 import JMessage from "jmessage-react-plugin" ;
 import { Toast } from "native-base" ;
+import moment from "moment" ;
+const defaultAvatar = "https://raw.githubusercontent.com/25juan/react-native-chat-ui/master/example/image/right.png";
  class Store {
     constructor(){
         this.initEventsListener() ;
+        this.loadConversation();
     }
      @observable
      user = {  } ;
@@ -13,12 +16,38 @@ import { Toast } from "native-base" ;
      }
     @observable
     notifications = [];
-
+     @observable
+     conversations = [];
     @action.bound
     initEventsListener(){
         JMessage.removeContactNotifyListener(this.addContactNotifyListener)
         JMessage.addContactNotifyListener(this.addContactNotifyListener) ;
+        JMessage.addReceiveMessageListener(()=>{
+            this.loadConversation();
+        });
     }
+     @action.bound
+     loadConversation(){
+         JMessage.getConversations(list=>{
+             let conversations = list.map(item=>{
+                return {
+                    target:item.target,
+                    title:item.title ,
+                    avatar:item.target.avatarThumbPath || defaultAvatar,
+                    text:item.latestMessage?(()=>{
+                        if(item.latestMessage.type === "text"){
+                            return  item.latestMessage.text;
+                        }
+                        return "[未知消息]" ;
+                    })():"[暂无消息]",
+                    date:item.latestMessage?(()=>{
+                        return moment(item.latestMessage.createTime).format("YYYY-MM-DD");
+                    })():moment().format("YYYY-MM-DD")
+                }
+             });
+            this.conversations = [ ...conversations ];
+         },()=>{});
+     }
     @action.bound
     addContactNotifyListener({fromUsername, type }){
         JMessage.getUserInfo({username:fromUsername},(user)=>{

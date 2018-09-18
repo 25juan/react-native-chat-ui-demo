@@ -28,16 +28,19 @@ export default class  extends Component{
     componentDidMount(){
         JMessage.addReceiveMessageListener(this.receiveMessage);
         BackHandler.addEventListener("hardwareBackPress",this.goBack);
-        this.getHistoryMessage();
+        this.getHistoryMessage(false,true);
     }
     form = 0 ;
-    getHistoryMessage = (callback)=>{
+    getHistoryMessage = (callback,isScrollBottom)=>{
         return new Promise((resolve)=>{
             JMessage.getHistoryMessages({ type: 'single', username: this.targetUsername, from: this.form, limit: 10 },
                 (msgArr) => {
                     this.form = this.form+10 ;
                     let arr = msgArr.map(msg=>this.covertJMsg(msg,"send_success")) ;
                     this.messageList.appendToTop(arr);
+                    if(isScrollBottom){
+                        this.messageList.scrollToBottom();
+                    }
                     typeof callback === "function" && callback()
                 }, (error) => {});
             resolve();
