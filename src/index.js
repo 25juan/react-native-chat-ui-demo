@@ -64,7 +64,10 @@ const MainTab = createTabNavigator({
 
 const MainNavigator = createStackNavigator({
     Chat:{
-        screen:Chat
+        screen:Chat,
+        navigationOptions:{
+            header:null
+        }
     },
     Notification:{
       screen:Notification,

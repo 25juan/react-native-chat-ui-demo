@@ -15,10 +15,15 @@ export default class  extends Component{
     state = {
         refreshing:false,
     };
-    componentDidMount(){
-        console.log(this.props) ;
-    }
-    renderItem = ({ item })=>{
+    acceptPress = (item,index)=>{
+        JMessage.acceptInvitation({ username:item.username },() => {}, (error) => {});
+        this.props.store.deleteNotification(index);
+    };
+    declinePress = (item,index)=>{
+        JMessage.declineInvitation({ username:item.username,reason:"" },() => {}, (error) => {});
+        this.props.store.deleteNotification(index);
+    };
+    renderItem = ({ item,index })=>{
         return (
             <ListItem avatar>
                 <Left>
@@ -29,16 +34,22 @@ export default class  extends Component{
                 <Text note>{ item.signature || "暂无个性签名" }</Text>
                 </Body>
                 <Right>
-                    <Icon name={gender[item.gender]}/>
+                    <Button onPress={()=>this.acceptPress(item,index)}>
+                        <Text>同意</Text>
+                    </Button>
+                    <Button onPress={()=>this.declinePress(item,index)}>
+                        <Text>拒绝</Text>
+                    </Button>
                 </Right>
             </ListItem>)
     };
     render(){
+        let { notifications } = this.props.store ;
         return (
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={()=>this.setState({ visible:true })}>
+                        <Button transparent onPress={()=>this.props.navigation.goBack()}>
                             <Icon name={"arrow-back"}/>
                         </Button>
                     </Left>
@@ -46,16 +57,12 @@ export default class  extends Component{
                         <Title>添加好友通知</Title>
                     </Body>
                 </Header>
-                {/*<FlatList*/}
-                    {/*onRefresh={this.fetchFriendList}*/}
-                    {/*refreshing={this.state.refreshing}*/}
-                    {/*data={this.state.data}*/}
-                    {/*keyExtractor={(item)=>item["username"]}*/}
-                    {/*renderItem={this.renderItem}/>*/}
-
-
-
-
+                <FlatList
+                    onRefresh={this.fetchFriendList}
+                    refreshing={this.state.refreshing}
+                    data={notifications}
+                    keyExtractor={(item)=>item["username"]}
+                    renderItem={this.renderItem}/>
             </Container>
         )
     }

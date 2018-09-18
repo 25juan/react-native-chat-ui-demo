@@ -20,21 +20,22 @@ export default class  extends Component{
         info:null,
     };
     componentDidMount(){
-        console.log(this.props)
         this.fetchFriendList();
     }
     username = "" ;
     fetchFriendList = ()=>{
         (async()=>{
-            let username = await AsyncStorage.getItem("username");
-            this.username = username;
-            if(!username){
+            let user = await AsyncStorage.getItem("user");
+            this.username = JSON.parse(user).username;
+            if(!this.username){
                 return ;
             }
             this.setState({ refreshing:true });
             JMessage.getFriends(data=>{
                 this.setState({ data, refreshing:false });
-            },()=>{});
+            },(error)=>{
+                console.log(error)
+            });
         })();
     };
     addFriend = ()=>{
@@ -51,7 +52,6 @@ export default class  extends Component{
         let {  username } = this.state ;
         if(username){
            JMessage.getUserInfo({username},(info)=>{
-
                 this.setState({
                     info
                 });
@@ -60,7 +60,9 @@ export default class  extends Component{
     };
     renderItem = ({ item })=>{
         return (
-            <ListItem avatar>
+            <ListItem
+                onPress={()=>this.props.navigation.navigate("Chat",{ ...item })}
+                avatar>
                 <Left>
                     <Thumbnail source={{uri:item.avatarThumbPath || defaultAvatar }}/>
                 </Left>

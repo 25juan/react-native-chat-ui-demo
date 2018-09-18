@@ -5,8 +5,15 @@ import { Toast } from "native-base" ;
     constructor(){
         this.initEventsListener() ;
     }
+     @observable
+     user = {  } ;
+     @action.bound
+     setUser(user){
+         this.user = { ...user } ;
+     }
     @observable
     notifications = [];
+
     @action.bound
     initEventsListener(){
         JMessage.removeContactNotifyListener(this.addContactNotifyListener)
@@ -27,6 +34,10 @@ import { Toast } from "native-base" ;
             }
 
         },()=>{});
+    }
+     @action.bound
+    deleteNotification(index){
+        this.notifications = this.notifications.splice(index,1) ;
     }
 
 };
