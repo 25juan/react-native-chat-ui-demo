@@ -8,6 +8,7 @@ import Chat from "./page/Chat" ;
 import Session from "./page/Session" ;
 import Mine from "./page/Mine";
 import Loding from "./page/Loding";
+import Notification from "./page/Notification";
 
 const MainTab = createTabNavigator({
     Friends:{
@@ -64,6 +65,12 @@ const MainTab = createTabNavigator({
 const MainNavigator = createStackNavigator({
     Chat:{
         screen:Chat
+    },
+    Notification:{
+      screen:Notification,
+        navigationOptions:{
+            header:null
+        }
     },
     Main:{
         screen:MainTab,

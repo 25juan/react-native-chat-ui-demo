@@ -13,6 +13,8 @@ import Navigation from "./src" ;
 import JMessage from "jmessage-react-plugin" ;
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
+import store from "./src/store" ;
+import { Provider } from "mobx-react" ;
 export default class App extends Component {
     componentDidMount(){
         JMessage.init({
@@ -23,13 +25,15 @@ export default class App extends Component {
     }
     render() {
         return (
-            <StyleProvider style={getTheme(material)}>
-                <Root>
-                    <View style={styles.container}>
-                        <Navigation/>
-                    </View>
-                </Root>
-            </StyleProvider>
+            <Provider store={store} >
+                <StyleProvider style={getTheme(material)}>
+                    <Root>
+                        <View style={styles.container}>
+                            <Navigation/>
+                        </View>
+                    </Root>
+                </StyleProvider>
+            </Provider>
         );
     }
 }
