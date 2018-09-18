@@ -2,12 +2,15 @@ import React,{ Component } from "react" ;
 import { Input,Text,Container,Header,Left,List,ListItem,Form,Item,Button,Right,Thumbnail,Icon,Body,Title,Content,Toast  } from "native-base" ;
 import { FlatList,AsyncStorage,Modal,View } from "react-native" ;
 import JMessage from "jmessage-react-plugin" ;
+import { observer,inject } from "mobx-react" ;
 const defaultAvatar = "https://raw.githubusercontent.com/25juan/react-native-chat-ui/master/example/image/right.png";
 const gender = {
     female:"female",
     male:"male",
     unknown:"person"
 };
+@inject("store")
+@observer
 export default class  extends Component{
     state = {
         data :[],
@@ -17,6 +20,7 @@ export default class  extends Component{
         info:null,
     };
     componentDidMount(){
+        console.log(this.props)
         this.fetchFriendList();
     }
     username = "" ;

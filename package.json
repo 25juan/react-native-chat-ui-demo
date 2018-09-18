@@ -10,8 +10,8 @@
     "jcore-react-native": "^1.2.9",
     "jmessage-react-plugin": "^2.4.4",
     "lodash": "^4.17.11",
-    "mobx": "3.6.2",
-    "mobx-react": "4.4.3",
+    "mobx": "^4.3.0",
+    "mobx-react": "^5.2.5",
     "native-base": "^2.8.0",
     "prop-types": "^15.6.2",
     "react": "16.5.0",
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
+    "babel-preset-mobx": "^2.0.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.45.3",
     "react-test-renderer": "16.5.0"

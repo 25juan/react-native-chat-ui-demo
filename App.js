@@ -14,7 +14,7 @@ import JMessage from "jmessage-react-plugin" ;
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 import store from "./src/store" ;
-import { Provider } from "mobx-react" ;
+import { Provider } from "mobx-react/native" ;
 export default class App extends Component {
     componentDidMount(){
         JMessage.init({
@@ -34,6 +34,7 @@ export default class App extends Component {
                     </Root>
                 </StyleProvider>
             </Provider>
+
         );
     }
 }
