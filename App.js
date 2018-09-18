@@ -8,9 +8,11 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Root} from "native-base" ;
+import {Root,StyleProvider} from "native-base" ;
 import Navigation from "./src" ;
 import JMessage from "jmessage-react-plugin" ;
+import getTheme from './native-base-theme/components';
+import material from './native-base-theme/variables/material';
 export default class App extends Component {
     componentDidMount(){
         JMessage.init({
@@ -21,11 +23,13 @@ export default class App extends Component {
     }
     render() {
         return (
-            <Root>
-                <View style={styles.container}>
-                    <Navigation/>
-                </View>
-            </Root>
+            <StyleProvider style={getTheme(material)}>
+                <Root>
+                    <View style={styles.container}>
+                        <Navigation/>
+                    </View>
+                </Root>
+            </StyleProvider>
         );
     }
 }

@@ -19,8 +19,11 @@ export default class  extends Component{
             password,
         },() => {
             (async()=>{
-                await AsyncStorage.setItem('username',username);
-                this.props.navigation.navigate("Main");
+                await AsyncStorage.setItem('user',JSON.stringify({
+                    username,
+                    password
+                }));
+                this.props.navigation.navigate("MainNavigator");
             })();
         }, (error) => {})
     };

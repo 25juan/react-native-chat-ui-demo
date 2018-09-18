@@ -1,5 +1,6 @@
 import React,{ Component } from "react" ;
 import { createStackNavigator,createTabNavigator,createSwitchNavigator } from "react-navigation" ;
+import { Icon } from "native-base" ;
 import Login from "./page/Login" ;
 import Register from "./page/Register" ;
 import Friends from "./page/Friends" ;
@@ -7,32 +8,54 @@ import Chat from "./page/Chat" ;
 import Session from "./page/Session" ;
 import Mine from "./page/Mine";
 import Loding from "./page/Loding";
+
 const MainTab = createTabNavigator({
     Friends:{
         screen:Friends,
-        navigationOptions:{
+        navigationOptions : {
             tabBarLabel:"好友",
+            tabBarIcon:({ focused, tintColor })=>{
+                return <Icon style={{color:tintColor}} name={"people"}/>
+            }
         }
     },
     Session:{
         screen:Session,
-        navigationOptions:{tabBarLabel:"会话"}
+        navigationOptions:{
+            tabBarLabel:"会话",
+            tabBarIcon:({ focused, tintColor })=>{
+                return <Icon style={{color:tintColor}} name={"chatbubbles"}/>
+            }
+        }
     },
     Mine:{
         screen:Mine,
-        navigationOptions:{tabBarLabel:"我的"}
+        navigationOptions:{
+            tabBarLabel:"我的",
+            tabBarIcon:({ focused, tintColor })=>{
+                return <Icon style={{color:tintColor}} name={"person"}/>
+            }
+        }
     },
 },{
     tabBarPosition :"bottom",
     tabBarOptions:{
+        showIcon:true,
         style:{
             backgroundColor:"#45b3c4",
+            height:55,
+            paddingTop:0
         },
         labelStyle:{
-            color:"#fff"
+            color:"#fff",
+            marginTop:0
+        },
+        iconStyle:{
+            marginTop:0
         },
         indicatorStyle:{
-            backgroundColor:"#fff"
+            backgroundColor:"#fff",
+            height:0
         }
     }
 });
