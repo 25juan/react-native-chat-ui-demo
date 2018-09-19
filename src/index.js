@@ -9,9 +9,7 @@ import Session from "./page/Session" ;
 import Mine from "./page/Mine";
 import Loding from "./page/Loding";
 import Notification from "./page/Notification";
-import AudioExample from "./page/Audio"
 const MainTab = createTabNavigator({
-    AudioExample:AudioExample,
     Friends:{
         screen:Friends,
         navigationOptions : {
